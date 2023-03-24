@@ -295,7 +295,7 @@
 				<daytraderTruststoreLocation>${daytraderKeystoreFolder}/truststore.jks</daytraderTruststoreLocation>
 				<daytraderTruststorePassword>password</daytraderTruststorePassword>
 				<!-- Port -->
-				<serverPort>8080</serverPort>
+				<serverPort>2443</serverPort>
 				<databaseDriver>org.apache.derby.jdbc.EmbeddedDriver</databaseDriver>
 				<databaseUrl>jdbc:derby:tradesdb;create=true</databaseUrl>
 
@@ -472,39 +472,18 @@
 
 									<run>
 										<ports>
-											<port>2443:8080</port>
+											<port>2443:${serverPort}</port>
 										</ports>
 										<wait>
 											<log>Started GatewayApplication</log>
 										</wait>
 									</run>
-
 								</image>
 							</images>
 						</configuration>
-						<executions>
-							<execution>
-								<id>default</id>
-								<phase>package</phase>
-								<goals>
-									<goal>build</goal>
-									<goal>push</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>deploy</id>
-								<phase>deploy</phase>
-								<goals>
-									<goal>build</goal>
-									<goal>push</goal>
-									<goal>run</goal>
-								</goals>
-							</execution>
-						</executions>
 					</plugin>
 				</plugins>
 			</build>
 		</profile>
 	</profiles>
-
 </project>
