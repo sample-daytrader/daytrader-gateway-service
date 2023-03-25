@@ -32,6 +32,7 @@ import java.math.BigDecimal;
 // Spring
 import com.ibm.sample.daytrader.gateway.entities.AccountDataBean;
 import com.ibm.sample.daytrader.gateway.entities.AccountProfileDataBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -53,8 +54,9 @@ public class AccountsRemoteCallService extends BaseRemoteCallService
 	}
 
 //
-//  - Naming convention based service discovery 
-	  private static String accountsServiceRoute = System.getenv("DAYTRADER_ACCOUNTS_SERVICE");	
+//  - Naming convention based service discovery
+      @Value("${daytrader.services.account}")
+	  private static String accountsServiceRoute;
 
 	   /**
 		*

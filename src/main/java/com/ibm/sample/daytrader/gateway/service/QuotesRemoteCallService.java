@@ -32,6 +32,7 @@ import java.util.Collection;
 
 // Spring
 import com.ibm.sample.daytrader.gateway.entities.QuoteDataBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -54,10 +55,12 @@ public class QuotesRemoteCallService extends BaseRemoteCallService
 
 //
 //  - Naming convention based service discovery 
-	private static String quotesServiceRoute = System.getenv("DAYTRADER_QUOTES_SERVICE");	
+		@Value("${daytrader.services.quotes}")
+		private static String quotesServiceRoute;
 
-	
-	   /**
+
+
+	/**
 		*
 		* @see QuotesServices#tradeBuildDB(int,int)
 		*
