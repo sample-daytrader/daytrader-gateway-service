@@ -53,54 +53,53 @@ public class QuotesRemoteCallService extends BaseRemoteCallService
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false); // ignore properties that are not declared
 	}
 
-//
-//  - Naming convention based service discovery 
-		@Value("${daytrader.services.quotes}")
-		private static String quotesServiceRoute;
-
+	// Service discovery from settings in application.properties file
+	private static String quotesServiceRoute;
+	@Value("${daytrader.services.quotes}")
+	public void setQuotesServiceRoute(String route) {quotesServiceRoute = route;}
 
 
 	/**
-		*
-		* @see QuotesServices#tradeBuildDB(int,int)
-		*
-		*/
-		public boolean tradeBuildDB(int limit, int offset) throws Exception 
-		{ 
-	    	String url = quotesServiceRoute + "/admin/tradeBuildDB?limit="+limit+ "&offset=" + offset;
-			Log.debug("QuotesRemoteCallService.quotesBuildDB() - " + url);
-	    	String responseEntity = invokeEndpoint(url, "POST", "");
-	    	Boolean success = mapper.readValue(responseEntity,Boolean.class);
-	    	return success;
-		}
-	  
-	   /**
-		*
-		* @see TradeServices#resetTrade(boolean)
-		*
-		*/
-		public RunStatsDataBean resetTrade(boolean deleteAll) throws Exception
-		{
-	    	String url = quotesServiceRoute + "/admin/resetTrade?deleteAll=" + deleteAll;
-			Log.debug("QuotesRemoteCallService.resetTrade() - " + url);
-	    	String responseEntity = invokeEndpoint(url, "GET", null); // Entity must be null for http method GET.
-	    	RunStatsDataBean runStatsData = mapper.readValue(responseEntity,RunStatsDataBean.class);
-	    	return runStatsData; 
-		}
+	*
+	* @see QuotesServices#tradeBuildDB(int,int)
+	*
+	*/
+	public boolean tradeBuildDB(int limit, int offset) throws Exception
+	{
+		String url = quotesServiceRoute + "/admin/tradeBuildDB?limit="+limit+ "&offset=" + offset;
+		Log.debug("QuotesRemoteCallService.quotesBuildDB() - " + url);
+		String responseEntity = invokeEndpoint(url, "POST", "");
+		Boolean success = mapper.readValue(responseEntity,Boolean.class);
+		return success;
+	}
 
-	   /**
-		*
-		* @see TradeDBServices#recreateDBTables(Object[],PrintWriter)
-		*
-		*/
-		public boolean recreateDBTables() throws Exception 
-		{
-	    	String url = quotesServiceRoute + "/admin/recreateDBTables";
-			Log.debug("QuotesRemoteCallService.recreateDBTables() - " + url);
-	    	String responseEntity = invokeEndpoint(url, "POST", "");
-	    	Boolean success = mapper.readValue(responseEntity,Boolean.class);
-	    	return success;
-		}
+   /**
+	*
+	* @see TradeServices#resetTrade(boolean)
+	*
+	*/
+	public RunStatsDataBean resetTrade(boolean deleteAll) throws Exception
+	{
+		String url = quotesServiceRoute + "/admin/resetTrade?deleteAll=" + deleteAll;
+		Log.debug("QuotesRemoteCallService.resetTrade() - " + url);
+		String responseEntity = invokeEndpoint(url, "GET", null); // Entity must be null for http method GET.
+		RunStatsDataBean runStatsData = mapper.readValue(responseEntity,RunStatsDataBean.class);
+		return runStatsData;
+	}
+
+   /**
+	*
+	* @see TradeDBServices#recreateDBTables(Object[],PrintWriter)
+	*
+	*/
+	public boolean recreateDBTables() throws Exception
+	{
+		String url = quotesServiceRoute + "/admin/recreateDBTables";
+		Log.debug("QuotesRemoteCallService.recreateDBTables() - " + url);
+		String responseEntity = invokeEndpoint(url, "POST", "");
+		Boolean success = mapper.readValue(responseEntity,Boolean.class);
+		return success;
+	}
     
 	/**
 	 * 
