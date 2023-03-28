@@ -55,22 +55,23 @@ public class AccountsRemoteCallService extends BaseRemoteCallService
 
 //
 //  - Naming convention based service discovery
-      @Value("${daytrader.services.account}")
-	  private static String accountsServiceRoute;
+	private static String accountsServiceRoute;
+	@Value("${daytrader.services.account}")
+	public void setAccountsServiceRoute(String route) { accountsServiceRoute = route;}
 
-	   /**
-		*
-		* @see AccountsServices#tradeBuildDB(int,int)
-		*
-		*/
-		public boolean tradeBuildDB(int limit, int offset) throws Exception 
-		{ 
-	    	String url = accountsServiceRoute + "/admin/tradeBuildDB?limit="+limit+ "&offset=" + offset;
-			Log.debug("AccountsRemoteCallService.tradeBuildDB() - " + url);
-	    	String responseEntity = invokeEndpoint(url, "POST", "");
-	    	Boolean success = mapper.readValue(responseEntity,Boolean.class);
-	    	return success;
-		}
+   /**
+	*
+	* @see AccountsServices#tradeBuildDB(int,int)
+	*
+	*/
+	public boolean tradeBuildDB(int limit, int offset) throws Exception
+	{
+		String url = accountsServiceRoute + "/admin/tradeBuildDB?limit="+limit+ "&offset=" + offset;
+		Log.debug("AccountsRemoteCallService.tradeBuildDB() - " + url);
+		String responseEntity = invokeEndpoint(url, "POST", "");
+		Boolean success = mapper.readValue(responseEntity,Boolean.class);
+		return success;
+	}
 	  
    /**
 	*
