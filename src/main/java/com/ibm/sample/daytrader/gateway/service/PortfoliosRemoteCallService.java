@@ -59,7 +59,7 @@ public class PortfoliosRemoteCallService extends BaseRemoteCallService
 //  - Naming convention based service discovery 
 	private static String portfoliosServiceRoute;
 	@Value("${daytrader.services.portfolios}")
-	public void setAccountsServiceRoute(String route) { portfoliosServiceRoute = route;}
+	public void setPortfoliosServiceRoute(String route) { portfoliosServiceRoute = route;}
 
 	
 	   /**
